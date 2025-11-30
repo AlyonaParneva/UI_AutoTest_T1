@@ -1,0 +1,1 @@
+{"uuid":"2cad841d-c3bd-437e-8a7a-6bb712aab0db","name":"SmokeT1Test","children":["6a308244-c22b-4836-ba02-d1e27d32b228"],"befores":[{"name":"beforeAll","status":"passed","stage":"finished","steps":[],"attachments":[],"parameters":[],"start":1764508318086,"stop":1764508318389}],"afters":[],"start":1764508318067,"stop":1764508323381}

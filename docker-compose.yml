@@ -1,0 +1,34 @@
+services:
+  selenium:
+    image: selenium/standalone-chrome:4.25.0
+    shm_size: 2gb
+    ports:
+      - "4444:4444"
+      - "7900:7900"             # VNC в браузер: http://localhost:7900/?autoconnect=1&resize=scale
+    environment:
+      - SE_NODE_MAX_SESSIONS=1
+      - SE_NODE_SESSION_TIMEOUT=300
+      - SE_VNC_NO_PASSWORD=1
+
+  tests:
+    image: maven:3.9.6-eclipse-temurin-17
+    working_dir: /project
+    volumes:
+      - ./:/project
+      - maven-repo:/root/.m2
+    environment:
+      - MAVEN_OPTS=-Xmx1024m
+    depends_on:
+      - selenium
+    command: >
+      bash -lc "
+      mvn -q -DbaseUrl=https://t1.ru
+             -DremoteUrl=http://selenium:4444/wd/hub
+             -Dheadless=true
+             -Dbrowser=chrome
+             clean test &&
+      mvn -q allure:report
+      "
+
+volumes:
+  maven-repo:
