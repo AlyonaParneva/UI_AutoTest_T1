@@ -45,28 +45,20 @@ jobs:
             -DremoteUrl=http://localhost:4444/wd/hub \
             -Dheadless=true
 
-      - name: Install Allure CLI
+      - name: Generate Allure HTML report via Maven
         run: |
-          curl -sL https://github.com/allure-framework/allure2/releases/latest/download/allure-commandline.zip -o allure.zip
-          unzip -q allure.zip -d allure-cli
-          sudo mv allure-cli/allure-*/bin/allure /usr/local/bin/allure
-          allure --version
+          mvn -B allure:report
 
-      - name: Generate Allure HTML report
-        run: |
-          allure generate allure-results -o allure-report --clean
-
-
-      - name: Upload Allure results
+      - name: Upload Allure results (raw)
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: allure-results
-          path: target/allure-results
+          path: allure-results
 
       - name: Upload Allure HTML report
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: allure-report
-          path: allure-report
+          path: target/site/allure-maven-plugin
