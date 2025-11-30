@@ -1,19 +1,12 @@
-name: UI Tests (Selenide + Allure)
+name: UI Tests + Allure
 
 on:
   push:
-    branches: [ main, master ]
-  pull_request:
-    branches: [ main, master ]
+    branches: [ master, main ]
   workflow_dispatch:
-    inputs:
-      tags:
-        description: 'JUnit5 tags to run (smoke, ui, smoke,ui)'
-        required: false
-        default: 'smoke'
 
 jobs:
-  ui-tests:
+  tests:
     runs-on: ubuntu-latest
 
     services:
@@ -21,44 +14,31 @@ jobs:
         image: selenium/standalone-chrome:latest
         ports:
           - 4444:4444
-        options: >-
-          --shm-size=2g
-
-    env:
-      TAGS: ${{ github.event.inputs.tags }}
+        options: --shm-size=2g
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
+      - uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
-          java-version: '17'
-          cache: 'maven'
+          distribution: temurin
+          java-version: 17
+          cache: maven
 
       - name: Run UI tests
         run: |
-          mvn -B clean test \
-            -DTAGS=${TAGS} \
+          mvn clean test \
             -DremoteUrl=http://localhost:4444/wd/hub \
             -Dheadless=true
 
-      - name: Generate Allure HTML report via Maven
+      - name: Generate Allure report
         run: |
-          mvn -B allure:report
+          sudo apt-get update
+          sudo apt-get install -y allure
+          allure generate target/allure-results -o target/allure-report --clean
 
-      - name: Upload Allure results (raw)
-        if: always()
-        uses: actions/upload-artifact@v4
+      - name: Deploy Allure to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          name: allure-results
-          path: target/allure-results
-
-      - name: Upload Allure HTML report
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: allure-report
-          path: target/site/allure-maven-plugin
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: target/allure-report
