@@ -19,6 +19,8 @@
     <slf4j.version>2.0.13</slf4j.version>
     <wdm.version>5.9.2</wdm.version>
     <assertj.version>3.24.2</assertj.version>
+    <postgres.version>42.7.3</postgres.version>
+    <hikari.version>5.1.0</hikari.version>
   </properties>
 
   <dependencies>
@@ -56,13 +58,13 @@
       <groupId>io.qameta.allure</groupId>
       <artifactId>allure-junit5</artifactId>
       <version>${allure.version}</version>
-      <scope>test</scope>
+<!--      <scope>test</scope>-->
     </dependency>
     <dependency>
       <groupId>io.qameta.allure</groupId>
       <artifactId>allure-selenide</artifactId>
       <version>${allure.version}</version>
-      <scope>test</scope>
+<!--      <scope>test</scope>-->
     </dependency>
 
     <!-- Логирование -->
@@ -72,6 +74,20 @@
       <version>${slf4j.version}</version>
       <scope>compile</scope>
     </dependency>
+
+    <!-- PostgreSQL -->
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>${postgres.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.zaxxer</groupId>
+      <artifactId>HikariCP</artifactId>
+      <version>${hikari.version}</version>
+    </dependency>
+
 
     <!-- Удобные ассерты (по желанию) -->
     <dependency>

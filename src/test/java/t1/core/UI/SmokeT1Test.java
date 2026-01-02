@@ -9,16 +9,18 @@ import static io.qameta.allure.Allure.step;
 
 import org.junit.jupiter.api.extension.ExtendWith;
 import t1.core.BaseTest;
+import t1.core.listeners.TestResultListener;
 
 
 @ExtendWith(AllureJunit5.class)
+@ExtendWith(TestResultListener.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class SmokeT1Test extends BaseTest {
 
 
     @Test
     @Order(1)
-    @Tag("smoke")
+    @Tag("NAV-1")
     @DisplayName("T1.ru: титул страницы содержит 'T1'")
     void titleContainsT1() {
         step("Открыть главную страницу T1", () -> {

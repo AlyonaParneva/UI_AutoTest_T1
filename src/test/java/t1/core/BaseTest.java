@@ -4,11 +4,14 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.extension.ExtendWith;
 import t1.core.config.TestConfig;
 import t1.core.drivers.DriverFactory;
+import t1.core.listeners.TestResultListener;
 
 import static t1.core.utils.Env.str;
 
+@ExtendWith(TestResultListener.class)
 public class BaseTest {
 
     @BeforeAll
