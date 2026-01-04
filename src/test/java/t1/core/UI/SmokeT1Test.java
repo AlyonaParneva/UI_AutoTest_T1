@@ -23,9 +23,9 @@ public class SmokeT1Test extends BaseTest {
     @Tag("NAV-1")
     @DisplayName("T1.ru: титул страницы содержит 'T1'")
     void titleContainsT1() {
-        step("Открыть главную страницу T1", () -> {
-            open("/");
-        });
+//        step("Открыть главную страницу T1", () -> {
+//            open("/");
+//        });
         step("Проверить, что title содержит 'Т1'", () -> {
         Assertions.assertTrue(
                 Selenide.title().toUpperCase().contains("Т1")

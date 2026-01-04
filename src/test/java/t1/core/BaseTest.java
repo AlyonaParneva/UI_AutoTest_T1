@@ -2,22 +2,35 @@ package t1.core;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import t1.core.config.TestConfig;
 import t1.core.drivers.DriverFactory;
 import t1.core.listeners.TestResultListener;
 
+import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.webdriver;
 import static t1.core.utils.Env.str;
 
 @ExtendWith(TestResultListener.class)
 public class BaseTest {
 
+    @BeforeEach
+    void skipIfForbidden() {
+        String source = webdriver().driver()
+                .getWebDriver()
+                .getPageSource();
+        Assumptions.assumeFalse(
+                source.contains("Forbidden"),
+                "Blocked by anti-bot protection"
+        );
+    }
+
     @BeforeAll
     static void beforeAll() {
         DriverFactory.setupLocalDrivers(System.getProperty("browser"));
         setupSelenide();
+        open("/");
     }
 
     public static void setupSelenide() {
@@ -35,6 +48,9 @@ public class BaseTest {
     }
 
 
-    @AfterEach
-    void tearDown() { Selenide.closeWebDriver(); }
+    @AfterAll
+    static void tearDown() {
+        Selenide.closeWebDriver();
+    }
+
 }

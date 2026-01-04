@@ -22,15 +22,15 @@ public class NavigationT1Test extends BaseTest {
     @Test
     @DisplayName("NAV-001. Верхнее меню ведёт по разделам внутри t1.ru")
     void nav001HeaderNavigationTest() {
-        Allure.step("Открыть главную страницу T1", () -> {
-            open("/");
-        });
+//        Allure.step("Открыть главную страницу T1", () -> {
+//            open("/");
+//        });
         step("SRZ: Главная страница открыта", () -> {
             mainPage.titleShouldBeVisible();
         });
         step("SRZ: Получаем текст заголовка главной страницы", () -> {
             String title = mainPage.getTitleText();
-            assertThat(title).contains("Бигтех");
+            assertThat(title).contains("Т1");
         });
         step("SRZ: Переходим в раздел «Продукты и решения»", () -> {
             mainPage.clickProductsButton();

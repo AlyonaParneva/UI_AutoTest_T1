@@ -9,7 +9,7 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class MainPage {
     private final SelenideElement mainTitle =
-            $x("//*[contains(text(),'Бигтех')]");
+            $x("//*[contains(text(),'Т1')]");
 
     private final SelenideElement productsButton =
             $x("//a[contains(@href,'products')]");
