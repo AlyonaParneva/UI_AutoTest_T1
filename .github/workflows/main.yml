@@ -37,13 +37,19 @@ jobs:
             -Dheadless=true
         continue-on-error: true
 
+      - name: Ensure Allure report directory exists
+        if: always()
+        run: mkdir -p target/site/allure-maven-plugin
+
       - name: Upload Pages artifact
+        if: always()
         uses: actions/upload-pages-artifact@v3
         with:
           path: target/site/allure-maven-plugin
 
   deploy:
     needs: tests
+    if: always()
     runs-on: ubuntu-latest
     environment:
       name: github-pages
