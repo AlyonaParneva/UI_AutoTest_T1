@@ -15,16 +15,16 @@ import static t1.core.utils.Env.str;
 @ExtendWith(TestResultListener.class)
 public class BaseTest {
 
-    @BeforeEach
-    void skipIfForbidden() {
-        String source = webdriver().driver()
-                .getWebDriver()
-                .getPageSource();
-        Assumptions.assumeFalse(
-                source.contains("Forbidden"),
-                "Blocked by anti-bot protection"
-        );
-    }
+//    @BeforeEach
+//    void skipIfForbidden() {
+//        String source = webdriver().driver()
+//                .getWebDriver()
+//                .getPageSource();
+//        Assumptions.assumeFalse(
+//                source.contains("Forbidden"),
+//                "Blocked by anti-bot protection"
+//        );
+//    }
 
     @BeforeAll
     static void beforeAll() {

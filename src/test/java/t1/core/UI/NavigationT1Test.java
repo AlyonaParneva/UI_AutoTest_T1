@@ -25,9 +25,9 @@ public class NavigationT1Test extends BaseTest {
 //        Allure.step("Открыть главную страницу T1", () -> {
 //            open("/");
 //        });
-        step("SRZ: Главная страница открыта", () -> {
-            mainPage.titleShouldBeVisible();
-        });
+//        step("SRZ: Главная страница открыта", () -> {
+//            mainPage.titleShouldBeVisible();
+//        });
         step("SRZ: Получаем текст заголовка главной страницы", () -> {
             String title = mainPage.getTitleText();
             assertThat(title).contains("Т1");

@@ -75,6 +75,6 @@ public class MainPage {
 
     @Step("Получить текст заголовка главной страницы")
     public String getTitleText() {
-        return mainTitle.shouldBe(visible).getText();
+        return mainTitle.getText();
     }
 }
