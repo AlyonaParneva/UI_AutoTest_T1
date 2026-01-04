@@ -37,15 +37,21 @@ jobs:
             -Dheadless=true
         continue-on-error: true
 
-      - name: Ensure Allure report directory exists
+      - name: Prepare Pages directory
         if: always()
-        run: mkdir -p target/site/allure-maven-plugin
+        run: |
+          mkdir -p pages
+          if [ -d "target/site/allure-maven-plugin/allure-maven-plugin" ]; then
+            cp -r target/site/allure-maven-plugin/allure-maven-plugin/* pages/
+          else
+            echo "<html><body><h1>Allure report was not generated</h1></body></html>" > pages/index.html
+          fi
 
       - name: Upload Pages artifact
         if: always()
         uses: actions/upload-pages-artifact@v3
         with:
-          path: target/site/allure-maven-plugin/allure-maven-plugin
+          path: pages
 
   deploy:
     needs: tests
