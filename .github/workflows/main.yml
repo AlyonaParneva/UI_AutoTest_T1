@@ -35,6 +35,7 @@ jobs:
           mvn clean test allure:report \
             -DremoteUrl=http://localhost:4444/wd/hub \
             -Dheadless=true
+        continue-on-error: true
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

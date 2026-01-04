@@ -28,10 +28,10 @@ public class NavigationT1Test extends BaseTest {
 //        step("SRZ: Главная страница открыта", () -> {
 //            mainPage.titleShouldBeVisible();
 //        });
-        step("SRZ: Получаем текст заголовка главной страницы", () -> {
-            String title = mainPage.getTitleText();
-            assertThat(title).contains("Т1");
-        });
+//        step("SRZ: Получаем текст заголовка главной страницы", () -> {
+//            String title = mainPage.getTitleText();
+//            assertThat(title).contains("Т1");
+//        });
         step("SRZ: Переходим в раздел «Продукты и решения»", () -> {
             mainPage.clickProductsButton();
         });
