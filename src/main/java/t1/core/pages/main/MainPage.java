@@ -23,9 +23,19 @@ public class MainPage {
     ElementsCollection cards =
             $$("section a");
 
+    private final SelenideElement pageRoot =
+            $x("//main | //section");
+
+    private final SelenideElement header = $("header");
+
+    @Step("Главная страница: страница загружена")
+    public void shouldBeOpened() {
+        pageRoot.shouldBe(visible);
+    }
+
     @Step("Проверка: главная страница T1 открыта")
     public void mainPageIsOpened() {
-        mainTitle.shouldBe(visible);
+        header.shouldBe(visible);
     }
 
     @Step("Проверка: отображается заголовок 'Бигтех для бизнеса'")

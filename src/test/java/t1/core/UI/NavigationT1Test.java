@@ -4,40 +4,64 @@ import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import t1.core.pages.main.MainPage;
 import t1.core.BaseTest;
+import t1.core.pages.about.AboutPage;
+import t1.core.pages.about.ContactsPage;
+import t1.core.pages.cases.CasesPage;
+import t1.core.pages.main.MainPage;
+import t1.core.pages.navigation.HeaderNavigation;
+import t1.core.pages.products.ProductsPage;
 
 import static com.codeborne.selenide.Selenide.open;
-import static com.codeborne.selenide.logevents.SelenideLogger.step;
-import static org.assertj.core.api.Assertions.assertThat;
+import static io.qameta.allure.Allure.step;
 
-@Tag("autotest")
-@Epic("T1")
-@Feature("Навигация")
-@Story("Главная страница")
+@Tag("NAV")
+@DisplayName("NAV-001. Верхнее меню ведёт по разделам внутри t1.ru")
 public class NavigationT1Test extends BaseTest {
 
-    private final MainPage mainPage = new MainPage();
+    MainPage main = new MainPage();
+    HeaderNavigation header = new HeaderNavigation();
+    ProductsPage products = new ProductsPage();
+    CasesPage casesPage = new CasesPage();
+    AboutPage about = new AboutPage();
+    ContactsPage contacts = new ContactsPage();
 
     @Test
-    @DisplayName("NAV-001. Верхнее меню ведёт по разделам внутри t1.ru")
-    void nav001HeaderNavigationTest() {
-//        Allure.step("Открыть главную страницу T1", () -> {
-//            open("/");
-//        });
-//        step("SRZ: Главная страница открыта", () -> {
-//            mainPage.titleShouldBeVisible();
-//        });
-//        step("SRZ: Получаем текст заголовка главной страницы", () -> {
-//            String title = mainPage.getTitleText();
-//            assertThat(title).contains("Т1");
-//        });
-        step("SRZ: Переходим в раздел «Продукты и решения»", () -> {
-            mainPage.clickProductsButton();
+    void nav001_headerNavigation() {
+
+        step("SRZ: Открыть главную страницу T1", () -> {
+            open("/");
+            main.shouldBeOpened();
         });
-        step("SRZ: Возвращаемся на главную страницу через логотип", () -> {
-            mainPage.clickLogo();
-            mainPage.titleShouldBeVisible();
+
+        step("SRZ: В хедере доступен пункт «Продукты и решения»", () -> {
+            header.productsShouldBeVisible();
         });
+
+        step("SRZ: Переход в «Продукты и решения» выполнен", () -> {
+            header.clickProducts();
+            products.shouldBeOpened();
+        });
+
+        step("SRZ: Переход в «Кейсы» выполнен", () -> {
+            header.clickCases();
+            casesPage.shouldBeOpened();
+        });
+
+        step("SRZ: Переход в «О нас» выполнен", () -> {
+            header.clickAbout();
+            about.shouldBeOpened();
+        });
+
+        step("SRZ: Переход в «Контакты» выполнен", () -> {
+            header.clickContacts();
+            contacts.shouldBeOpened();
+        });
+
+        step("SRZ: Возврат на главную страницу выполнен", () -> {
+            header.goToMainPage();
+            main.shouldBeOpened();
+        });
+
     }
 }

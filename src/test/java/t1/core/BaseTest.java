@@ -15,42 +15,38 @@ import static t1.core.utils.Env.str;
 @ExtendWith(TestResultListener.class)
 public class BaseTest {
 
-//    @BeforeEach
-//    void skipIfForbidden() {
-//        String source = webdriver().driver()
-//                .getWebDriver()
-//                .getPageSource();
-//        Assumptions.assumeFalse(
-//                source.contains("Forbidden"),
-//                "Blocked by anti-bot protection"
-//        );
-//    }
-
     @BeforeAll
     static void beforeAll() {
         DriverFactory.setupLocalDrivers(System.getProperty("browser"));
         setupSelenide();
-        open("/");
+    }
+
+    @BeforeEach
+    void setUp() {
     }
 
     public static void setupSelenide() {
         Configuration.baseUrl = str("baseUrl", "https://t1.ru");
         Configuration.browser = str("browser", "chrome");
-        Configuration.headless = Boolean.parseBoolean(str("headless", "true"));
-        String remote = str("remoteUrl", "");
+        Configuration.headless = Boolean.parseBoolean(str("headless", "false"));
+
         Configuration.timeout = 15000;
-        Configuration.pageLoadStrategy = "none";
         Configuration.pageLoadTimeout = 60000;
+        Configuration.pollingInterval = 300;
+
+        Configuration.pageLoadStrategy = "none";
+        Configuration.clickViaJs = false;
+        Configuration.fastSetValue = false;
+
+        String remote = str("remoteUrl", "");
         if (!remote.isBlank()) {
             Configuration.remote = remote;
             Configuration.browserSize = "1920x1080";
         }
     }
 
-
     @AfterAll
     static void tearDown() {
         Selenide.closeWebDriver();
     }
-
 }

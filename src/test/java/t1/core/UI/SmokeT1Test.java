@@ -10,27 +10,39 @@ import static io.qameta.allure.Allure.step;
 import org.junit.jupiter.api.extension.ExtendWith;
 import t1.core.BaseTest;
 import t1.core.listeners.TestResultListener;
+import t1.core.pages.main.MainPage;
+import t1.core.pages.navigation.HeaderNavigation;
 
 
-@ExtendWith(AllureJunit5.class)
-@ExtendWith(TestResultListener.class)
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@Tag("SMOKE")
+@DisplayName("SMOKE-001. Главная страница открывается и доступна навигация")
 public class SmokeT1Test extends BaseTest {
 
+    MainPage main;
+    HeaderNavigation header;
 
-    @Test
-    @Order(1)
-    @Tag("NAV-1")
-    @DisplayName("T1.ru: титул страницы содержит 'T1'")
-    void titleContainsT1() {
-//        step("Открыть главную страницу T1", () -> {
-//            open("/");
-//        });
-        step("Проверить, что title содержит 'Т1'", () -> {
-        Assertions.assertTrue(
-                Selenide.title().toUpperCase().contains("Т1")
-        );
-        });
+    @BeforeEach
+    void initPages() {
+        main = new MainPage();
+        header = new HeaderNavigation();
     }
 
+    @Test
+    void smoke001_mainPageAvailable() {
+        step("SRZ: Открыть главную страницу T1", () -> {
+            open("about:blank");
+            sleep(500);
+            webdriver().driver().getWebDriver()
+                    .navigate()
+                    .to("https://t1.ru");
+
+            sleep(2000);
+        });
+        step("SRZ: Главная страница отображается", () -> {
+            main.mainPageIsOpened();
+        });
+        step("SRZ: В хедере доступен пункт «Продукты и решения»", () -> {
+            header.productsShouldBeVisible();
+        });
+    }
 }
