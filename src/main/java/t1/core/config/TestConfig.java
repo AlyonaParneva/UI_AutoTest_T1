@@ -13,7 +13,7 @@ public class TestConfig {
         Configuration.timeout = 15000;
         Configuration.pageLoadStrategy = "eager";
         if (!remote.isBlank()) {
-            Configuration.remote = remote; // e.g. http://localhost:4444/wd/hub
+            Configuration.remote = remote;
             Configuration.browserSize = "1920x1080";
         }
     }
