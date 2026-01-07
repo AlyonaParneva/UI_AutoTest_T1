@@ -37,6 +37,16 @@ jobs:
             -Dheadless=true
         continue-on-error: true
 
+      - name: Debug allure folders
+        if: always()
+        run: |
+          echo "=== target ==="
+          ls -la target || true
+          echo "=== target/site ==="
+          ls -la target/site || true
+          echo "=== target/site/allure-maven-plugin ==="
+          ls -la target/site/allure-maven-plugin || true
+
       - name: Prepare Pages directory
         if: always()
         run: |
