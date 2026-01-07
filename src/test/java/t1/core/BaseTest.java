@@ -19,7 +19,7 @@ public class BaseTest {
     @BeforeAll
     static void beforeAll() {
         DriverFactory.setup(System.getProperty("browser"));
-        setupSelenide();
+        setupSelenideCommon();
     }
 
     @BeforeEach
@@ -36,10 +36,8 @@ public class BaseTest {
     }
 
 
-    public static void setupSelenide() {
+    private static void setupSelenideCommon() {
         Configuration.baseUrl = str("baseUrl", "https://t1.ru");
-        Configuration.browser = str("browser", "chrome");
-        Configuration.headless = Boolean.parseBoolean(str("headless", "false"));
 
         Configuration.timeout = 15000;
         Configuration.pageLoadTimeout = 60000;
@@ -48,12 +46,6 @@ public class BaseTest {
         Configuration.pageLoadStrategy = "none";
         Configuration.clickViaJs = false;
         Configuration.fastSetValue = false;
-
-        String remote = str("remoteUrl", "");
-        if (!remote.isBlank()) {
-            Configuration.remote = remote;
-            Configuration.browserSize = "1920x1080";
-        }
     }
 
     @AfterAll
