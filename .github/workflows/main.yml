@@ -68,7 +68,7 @@ jobs:
         if: always()
         uses: actions/upload-pages-artifact@v3
         with:
-          path: target/site/allure-maven-plugin
+          path: pages
 
   deploy:
     needs: tests
