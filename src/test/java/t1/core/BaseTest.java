@@ -18,7 +18,7 @@ public class BaseTest {
 
     @BeforeAll
     static void beforeAll() {
-        DriverFactory.setupLocalDrivers(System.getProperty("browser"));
+        DriverFactory.setup(System.getProperty("browser"));
         setupSelenide();
     }
 
