@@ -24,7 +24,7 @@ public class FooterNavigation {
             footer.$("#click_habr");
 
     private final SelenideElement vc =
-            footer.$("#click_vc.ru");
+            footer.$("a[id='click_vc.ru']");
 
     private final SelenideElement phone =
             footer.$("#click_phone");
