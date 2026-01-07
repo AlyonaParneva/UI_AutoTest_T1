@@ -30,7 +30,7 @@ jobs:
           java-version: 17
           cache: maven
 
-      - name: Run tests
+      - name: Run UI tests
         run: |
           mvn clean test \
             -DremoteUrl=http://localhost:4444/wd/hub \
@@ -40,6 +40,9 @@ jobs:
         if: always()
         run: |
           mvn allure:report
+
+      
+      
 
       - name: Debug allure folders
         if: always()
@@ -51,21 +54,21 @@ jobs:
           echo "=== target/site/allure-maven-plugin ==="
           ls -la target/site/allure-maven-plugin || true
 
-      - name: Prepare Pages directory
-        if: always()
-        run: |
-          mkdir -p pages
-          if [ -d "target/site/allure-maven-plugin/allure-maven-plugin" ]; then
-            cp -r target/site/allure-maven-plugin/allure-maven-plugin/* pages/
-          else
-            echo "<html><body><h1>Allure report was not generated</h1></body></html>" > pages/index.html
-          fi
+#      - name: Prepare Pages directory
+#        if: always()
+#        run: |
+#          mkdir -p pages
+#          if [ -d "target/site/allure-maven-plugin/allure-maven-plugin" ]; then
+#            cp -r target/site/allure-maven-plugin/allure-maven-plugin/* pages/
+#          else
+#            echo "<html><body><h1>Allure report was not generated</h1></body></html>" > pages/index.html
+#          fi
 
       - name: Upload Pages artifact
         if: always()
         uses: actions/upload-pages-artifact@v3
         with:
-          path: pages
+          path: target/site/allure-maven-plugin
 
   deploy:
     needs: tests
