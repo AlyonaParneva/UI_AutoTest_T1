@@ -54,15 +54,15 @@ jobs:
           echo "=== target/site/allure-maven-plugin ==="
           ls -la target/site/allure-maven-plugin || true
 
-#      - name: Prepare Pages directory
-#        if: always()
-#        run: |
-#          mkdir -p pages
-#          if [ -d "target/site/allure-maven-plugin/allure-maven-plugin" ]; then
-#            cp -r target/site/allure-maven-plugin/allure-maven-plugin/* pages/
-#          else
-#            echo "<html><body><h1>Allure report was not generated</h1></body></html>" > pages/index.html
-#          fi
+      - name: Prepare Pages directory
+        if: always()
+        run: |
+          mkdir -p pages
+          if [ -d "target/site/allure-maven-plugin" ]; then
+            cp -r target/site/allure-maven-plugin/* pages/
+          else
+            echo "<html><body><h1>Allure report was not generated</h1></body></html>" > pages/index.html
+          fi
 
       - name: Upload Pages artifact
         if: always()
