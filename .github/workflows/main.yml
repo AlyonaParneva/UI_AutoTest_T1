@@ -30,12 +30,16 @@ jobs:
           java-version: 17
           cache: maven
 
-      - name: Run tests + generate Allure report
+      - name: Run tests
         run: |
-          mvn clean test allure:report \
+          mvn clean test \
             -DremoteUrl=http://localhost:4444/wd/hub \
             -Dheadless=true || true
-          echo "===== MAVEN FINISHED ====="
+
+      - name: Generate Allure report
+        if: always()
+        run: |
+          mvn allure:report
 
       - name: Debug allure folders
         if: always()
