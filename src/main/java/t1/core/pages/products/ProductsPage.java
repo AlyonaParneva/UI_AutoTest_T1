@@ -3,19 +3,14 @@ package t1.core.pages.products;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
+import t1.core.pages.main.CookiesBanner;
 
 import static com.codeborne.selenide.CollectionCondition.sizeGreaterThan;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 
 public class ProductsPage {
+    private final CookiesBanner cookiesBanner = new CookiesBanner();
 
     private final SelenideElement pageRoot =
             $("main");
@@ -53,6 +48,7 @@ public class ProductsPage {
     @Step("Открыть первую карточку продукта")
     public void openFirstProductCard() {
         firstProductCard.shouldBe(visible);
+        cookiesBanner.waitAndAcceptIfAppears();
         executeJavaScript(
                 "arguments[0].scrollIntoView({block: 'center'});",
                 firstProductCard
@@ -64,16 +60,6 @@ public class ProductsPage {
         );
         firstProductCard.click();
     }
-
-    private void safeScrollAndClick(SelenideElement element) {
-        executeJavaScript(
-                "arguments[0].scrollIntoView({block: 'center'});",
-                element
-        );
-
-        element.shouldBe(visible, enabled).click();
-    }
-
 
     @Step("Выбрать первый фильтр ИТ-направления")
     public void selectFirstItFilter() {
@@ -102,38 +88,6 @@ public class ProductsPage {
     @Step("Карточки продуктов отображаются")
     public void productsShouldBeVisible() {
         productCards.shouldBe(sizeGreaterThan(0));
-    }
-
-    @Step("Ожидать кликабельность первой карточки продукта (до 3 минут)")
-    public void waitUntilFirstProductCardClickable() {
-        WebDriverWait wait = new WebDriverWait(
-                webdriver().driver().getWebDriver(),
-                Duration.ofMinutes(3)
-        );
-        wait.pollingEvery(Duration.ofSeconds(1));
-        wait.until(driver -> {
-            try {
-                SelenideElement card = $("a[href^='/products/']");
-                card.shouldBe(visible);
-
-                Point location = card.getLocation();
-                Dimension size = card.getSize();
-
-                int centerX = location.getX() + size.getWidth() / 2;
-                int centerY = location.getY() + size.getHeight() / 2;
-
-                JavascriptExecutor js = (JavascriptExecutor) driver;
-                WebElement elementAtPoint = (WebElement) js.executeScript(
-                        "return document.elementFromPoint(arguments[0], arguments[1]);",
-                        centerX, centerY
-                );
-
-                return elementAtPoint != null && elementAtPoint.equals(card);
-
-            } catch (Exception e) {
-                return false;
-            }
-        });
     }
 
 }

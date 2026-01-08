@@ -56,7 +56,7 @@ public class MainT1Test extends BaseTest {
         });
 
         step("SRZ: Принять cookies, если баннер отображается", () -> {
-            cookies.acceptIfPresent();
+            cookies.waitAndAcceptIfAppears();
         });
 
         step("SRZ: Обновить страницу", () -> {
