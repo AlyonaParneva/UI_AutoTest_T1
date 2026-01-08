@@ -11,6 +11,7 @@ import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.refresh;
 import static io.qameta.allure.Allure.step;
 import static org.assertj.core.api.Assertions.assertThat;
+import static t1.core.constans.UrlPages.SLASH_URL;
 
 public class MainT1Test extends BaseTest {
 
@@ -23,7 +24,7 @@ public class MainT1Test extends BaseTest {
     void main001_keyBlocksAndCta() {
 
         step("SRZ: Открыть главную страницу", () -> {
-            open("/");
+            open(SLASH_URL);
             main.shouldBeOpened();
         });
 
@@ -52,7 +53,7 @@ public class MainT1Test extends BaseTest {
     void main002_cookiesBanner() {
 
         step("SRZ: Открыть главную страницу", () -> {
-            open("/");
+            open(SLASH_URL);
         });
 
         step("SRZ: Принять cookies, если баннер отображается", () -> {

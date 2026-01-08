@@ -9,6 +9,7 @@ import t1.core.pages.cases.CasesPage;
 
 import static com.codeborne.selenide.Selenide.open;
 import static io.qameta.allure.Allure.step;
+import static t1.core.constans.UrlPages.CASES_URL;
 
 @Tag("CASE")
 @DisplayName("Cases. Каталог кейсов")
@@ -23,7 +24,7 @@ public class CasesT1Test extends BaseTest {
     void case001_casesCatalogVisible() {
 
         step("SRZ: Открыть страницу кейсов", () -> {
-            open("/cases");
+            open(CASES_URL);
             cases.shouldBeOpened();
         });
 
@@ -38,7 +39,7 @@ public class CasesT1Test extends BaseTest {
     void case002_industryFiltering() {
 
         step("SRZ: Открыть страницу кейсов", () -> {
-            open("/cases");
+            open(CASES_URL);
             cases.shouldBeOpened();
         });
 
@@ -57,7 +58,7 @@ public class CasesT1Test extends BaseTest {
     void case003_openCaseCard() {
 
         step("SRZ: Открыть страницу кейсов", () -> {
-            open("/cases");
+            open(CASES_URL);
             cases.shouldBeOpened();
         });
 
@@ -76,7 +77,7 @@ public class CasesT1Test extends BaseTest {
     void case004_caseContentStructure() {
 
         step("SRZ: Открыть страницу кейсов", () -> {
-            open("/cases");
+            open(CASES_URL);
             cases.shouldBeOpened();
         });
 
@@ -96,7 +97,7 @@ public class CasesT1Test extends BaseTest {
     void case005_pdfCaseAvailable() {
 
         step("SRZ: Открыть страницу кейсов", () -> {
-            open("/cases");
+            open(CASES_URL);
             cases.shouldBeOpened();
         });
 

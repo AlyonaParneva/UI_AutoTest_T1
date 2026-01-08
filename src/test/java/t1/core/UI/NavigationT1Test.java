@@ -15,6 +15,7 @@ import t1.core.pages.products.ProductsPage;
 
 import static com.codeborne.selenide.Selenide.*;
 import static io.qameta.allure.Allure.step;
+import static t1.core.constans.UrlPages.*;
 
 @Epic("Навигация")
 @Feature("Навигация по сайту t1.ru")
@@ -34,7 +35,7 @@ public class NavigationT1Test extends BaseTest {
     void nav001_headerNavigation() {
 
         step("SRZ: Открыть главную страницу T1", () -> {
-            open("/");
+            open(SLASH_URL);
             main.shouldBeOpened();
         });
 
@@ -65,7 +66,7 @@ public class NavigationT1Test extends BaseTest {
     void nav002_breadcrumbsBack() {
 
         step("SRZ: Открыть страницу «Продукты и решения»", () -> {
-            open("/products");
+            open(PRODUCTS_URL);
             products.shouldBeOpened();
         });
 
@@ -84,7 +85,7 @@ public class NavigationT1Test extends BaseTest {
     @DisplayName("NAV-003. Футер: внутренние и внешние ссылки")
     void nav003_footerLinks() {
         step("SRZ: Открыть главную страницу", () -> {
-            open("/");
+            open(SLASH_URL);
             main.shouldBeOpened();
         });
         step("SRZ: Футер отображается", () -> {
@@ -115,7 +116,7 @@ public class NavigationT1Test extends BaseTest {
     void nav004_logoNavigation() {
 
         step("SRZ: Открыть любую внутреннюю страницу", () -> {
-            open("/about");
+            open(ABOUT_URL);
             about.shouldBeOpened();
         });
 

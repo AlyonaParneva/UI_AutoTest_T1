@@ -9,6 +9,7 @@ import t1.core.pages.products.ProductsPage;
 
 import static com.codeborne.selenide.Selenide.open;
 import static io.qameta.allure.Allure.step;
+import static t1.core.constans.UrlPages.PRODUCTS_URL;
 
 @Tag("PRD")
 @DisplayName("Products. Каталог решений")
@@ -23,7 +24,7 @@ public class ProductsT1Test extends BaseTest {
     void prd001_productsCatalogVisible() {
 
         step("SRZ: Открыть страницу продуктов", () -> {
-            open("/products");
+            open(PRODUCTS_URL);
             products.shouldBeOpened();
         });
 
@@ -38,7 +39,7 @@ public class ProductsT1Test extends BaseTest {
     void prd002_itFiltering() {
 
         step("SRZ: Открыть страницу продуктов", () -> {
-            open("/products");
+            open(PRODUCTS_URL);
             products.shouldBeOpened();
         });
 
@@ -57,7 +58,7 @@ public class ProductsT1Test extends BaseTest {
     void prd003_combinedFiltering() {
 
         step("SRZ: Открыть страницу продуктов", () -> {
-            open("/products");
+            open(PRODUCTS_URL);
             products.shouldBeOpened();
         });
 
@@ -77,7 +78,7 @@ public class ProductsT1Test extends BaseTest {
     void prd004_openProductCard() {
 
         step("SRZ: Открыть страницу продуктов", () -> {
-            open("/products");
+            open(PRODUCTS_URL);
             products.shouldBeOpened();
         });
 

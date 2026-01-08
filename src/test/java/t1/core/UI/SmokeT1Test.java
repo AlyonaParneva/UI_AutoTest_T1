@@ -7,6 +7,8 @@ import org.junit.jupiter.api.*;
 
 import static com.codeborne.selenide.Selenide.*;
 import static io.qameta.allure.Allure.step;
+import static t1.core.constans.UrlPages.ABSOLUTE_URL;
+import static t1.core.constans.UrlPages.T1_RU_BASE_URL;
 
 import org.junit.jupiter.api.extension.ExtendWith;
 import t1.core.BaseTest;
@@ -31,11 +33,11 @@ public class SmokeT1Test extends BaseTest {
     @Test
     void smoke001_mainPageAvailable() {
         step("SRZ: Открыть главную страницу T1", () -> {
-            open("about:blank");
+            open(ABSOLUTE_URL);
             sleep(500);
             webdriver().driver().getWebDriver()
                     .navigate()
-                    .to("https://t1.ru");
+                    .to(T1_RU_BASE_URL);
 
             sleep(2000);
         });
