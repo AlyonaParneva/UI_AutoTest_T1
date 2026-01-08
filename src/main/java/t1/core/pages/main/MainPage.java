@@ -87,4 +87,5 @@ public class MainPage {
     public String getTitleText() {
         return mainTitle.getText();
     }
+
 }

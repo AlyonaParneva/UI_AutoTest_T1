@@ -48,8 +48,6 @@ public class TestResult {
         return environment;
     }
 
-    // ===== setters =====
-
     public void setId(UUID id) {
         this.id = id;
     }

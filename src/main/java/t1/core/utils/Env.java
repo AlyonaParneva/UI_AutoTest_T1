@@ -8,6 +8,10 @@ public class Env {
     public static String str(String key, String def) {
         String sys = System.getProperty(key);
         if (sys != null && !sys.isBlank()) return sys;
-        try { return R.getString(key); } catch (Exception ignored) { return def; }
+        try {
+            return R.getString(key);
+        } catch (Exception ignored) {
+            return def;
+        }
     }
 }

@@ -11,11 +11,11 @@ public class TestResultRepository {
 
     public void save(TestResult result) {
         String sql = """
-        INSERT INTO test_results
-        (id, test_id, test_name, status, error_message,
-         duration_ms, browser, environment)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-        """;
+                INSERT INTO test_results
+                (id, test_id, test_name, status, error_message,
+                 duration_ms, browser, environment)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                """;
 
         try (Connection conn = DataSourceProvider.getDataSource().getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {

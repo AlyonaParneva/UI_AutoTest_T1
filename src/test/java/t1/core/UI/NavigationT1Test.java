@@ -34,7 +34,7 @@ public class NavigationT1Test extends BaseTest {
     void nav001_headerNavigation() {
 
         step("SRZ: Открыть главную страницу T1", () -> {
-             open("/");
+            open("/");
             main.shouldBeOpened();
         });
 
