@@ -17,8 +17,8 @@ import static com.codeborne.selenide.Selenide.*;
 import static io.qameta.allure.Allure.step;
 import static t1.core.constans.UrlPages.*;
 
-@Epic("Навигация")
-@Feature("Навигация по сайту t1.ru")
+@Tag("NAV")
+@DisplayName("Navigation. Навигация по сайту t1.ru")
 public class NavigationT1Test extends BaseTest {
 
     MainPage main = new MainPage();

@@ -13,6 +13,8 @@ import static io.qameta.allure.Allure.step;
 import static org.assertj.core.api.Assertions.assertThat;
 import static t1.core.constans.UrlPages.SLASH_URL;
 
+@Tag("MAIN")
+@DisplayName("MAIN. Ключевые блоки на главной странице T1")
 public class MainT1Test extends BaseTest {
 
     MainPage main = new MainPage();
