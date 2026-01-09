@@ -2,8 +2,14 @@ name: UI Tests + Allure Pages
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [ master ]
+
   workflow_dispatch:
+    inputs:
+      tags:
+        description: 'JUnit tags (e.g. SMOKE, REGRESSION, HDR)'
+        required: false
+        default: ''
 
 permissions:
   contents: read
@@ -32,9 +38,18 @@ jobs:
 
       - name: Run UI tests
         run: |
-          mvn clean test \
-            -DremoteUrl=http://localhost:4444/wd/hub \
-            -Dheadless=true || true
+          if [ -z "${{ github.event.inputs.tags }}" ]; then
+            echo "Running ALL tests"
+            mvn clean test \
+              -DremoteUrl=http://localhost:4444/wd/hub \
+              -Dheadless=true
+          else
+            echo "Running tests with tags: ${{ github.event.inputs.tags }}"
+            mvn clean test \
+              -DremoteUrl=http://localhost:4444/wd/hub \
+              -Dheadless=true \
+              -Dgroups=${{ github.event.inputs.tags }}
+          fi
 
       - name: Generate Allure report
         if: always()
