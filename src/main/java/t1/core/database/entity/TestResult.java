@@ -94,7 +94,11 @@ public class TestResult {
         r.setErrorMessage(error);
         r.setDurationMs(duration);
         r.setBrowser(Configuration.browser);
-        r.setEnvironment(System.getProperty("env", "local"));
+        String environment = System.getProperty(
+                "environment",
+                System.getenv().getOrDefault("ENVIRONMENT", "local")
+        );
+        r.setEnvironment(environment);
         return r;
     }
 

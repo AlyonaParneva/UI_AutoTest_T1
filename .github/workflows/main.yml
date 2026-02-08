@@ -36,28 +36,31 @@ jobs:
           java-version: 17
           cache: maven
 
+      - name: Clean allure results
+        run: |
+          rm -rf target/allure-results
+
       - name: Run UI tests
         run: |
           if [ -z "${{ github.event.inputs.tags }}" ]; then
             echo "Running ALL tests"
             mvn clean test \
               -DremoteUrl=http://localhost:4444/wd/hub \
-              -Dheadless=true
+              -Dheadless=true \
+              -Denvironment=ci
           else
             echo "Running tests with tags: ${{ github.event.inputs.tags }}"
             mvn clean test \
               -DremoteUrl=http://localhost:4444/wd/hub \
               -Dheadless=true \
-              -Dgroups=${{ github.event.inputs.tags }}
+              -Dgroups=${{ github.event.inputs.tags }} \
+              -Denvironment=ci
           fi
 
       - name: Generate Allure report
         if: always()
         run: |
           mvn allure:report
-
-      
-      
 
       - name: Debug allure folders
         if: always()
