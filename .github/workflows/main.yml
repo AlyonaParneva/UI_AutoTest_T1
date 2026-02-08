@@ -89,6 +89,10 @@ jobs:
           else
             echo "<html><body><h1>Allure report was not generated</h1></body></html>" > pages/index.html
           fi
+          
+          if [ -f "build/analytics/report.txt" ]; then
+            cp build/analytics/report.txt pages/autotest_analytics.txt
+          fi
 
       - name: Upload Pages artifact
         if: always()
