@@ -53,7 +53,7 @@ jobs:
             mvn clean test \
               -DremoteUrl=http://localhost:4444/wd/hub \
               -Dheadless=true \
-              -Dgroups=${{ github.event.inputs.tags }} \
+              -DincludeTags=${{ github.event.inputs.tags }}  \
               -Denvironment=ci
           fi
 
