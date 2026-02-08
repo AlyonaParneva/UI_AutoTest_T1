@@ -5,6 +5,7 @@ import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import t1.core.config.TestConfig;
+import t1.core.database.service.AnalyticsReportGenerator;
 import t1.core.drivers.DriverFactory;
 import t1.core.listeners.TestResultListener;
 
@@ -54,4 +55,10 @@ public class BaseTest {
     static void tearDown() {
         Selenide.closeWebDriver();
     }
+
+    @AfterAll
+    static void afterAll() {
+        AnalyticsReportGenerator.generate();
+    }
+
 }

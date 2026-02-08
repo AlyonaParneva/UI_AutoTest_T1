@@ -57,6 +57,14 @@ jobs:
               -Denvironment=ci
           fi
 
+      - name: Upload analytics report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: autotest-analytics
+          path: build/analytics/report.txt
+
+
       - name: Generate Allure report
         if: always()
         run: |
