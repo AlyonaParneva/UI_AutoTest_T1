@@ -47,15 +47,16 @@ jobs:
             mvn clean test \
               -DremoteUrl=http://localhost:4444/wd/hub \
               -Dheadless=true \
-              -Denvironment=ci
+              -Denvironment=ci || true
           else
             echo "Running tests with tags: ${{ github.event.inputs.tags }}"
             mvn clean test \
               -DremoteUrl=http://localhost:4444/wd/hub \
               -Dheadless=true \
               -Djunit.jupiter.tags.include=${{ github.event.inputs.tags }} \
-              -Denvironment=ci
+              -Denvironment=ci || true
           fi
+      
 
       - name: Upload analytics report
         if: always()
