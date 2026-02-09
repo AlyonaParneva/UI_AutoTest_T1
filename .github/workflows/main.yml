@@ -56,10 +56,6 @@ jobs:
               -Djunit.jupiter.tags.include=${{ github.event.inputs.tags }} \
               -Denvironment=ci
           fi
-          
-          if [ -f "build/analytics/report.txt" ]; then
-            cp build/analytics/report.txt pages/autotest_analytics.txt
-          fi
 
       - name: Upload analytics report
         if: always()
