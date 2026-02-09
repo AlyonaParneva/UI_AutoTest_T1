@@ -64,7 +64,6 @@ jobs:
           name: autotest-analytics
           path: build/analytics/report.txt
 
-
       - name: Generate Allure report
         if: always()
         run: |
