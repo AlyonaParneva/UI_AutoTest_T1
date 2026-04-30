@@ -53,8 +53,8 @@ public class BaseTest {
         Configuration.baseUrl = str("baseUrl", T1_RU_BASE_URL);
 
         Configuration.browserSize = "1920x1080";
-        Configuration.timeout = 30000;
-        Configuration.pageLoadTimeout = 120000;
+        Configuration.timeout = 15000;
+        Configuration.pageLoadTimeout = 60000;
         Configuration.pollingInterval = 300;
 
         Configuration.pageLoadStrategy = "normal";
