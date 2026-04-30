@@ -9,6 +9,8 @@ import t1.core.database.service.AnalyticsReportGenerator;
 import t1.core.drivers.DriverFactory;
 import t1.core.listeners.TestResultListener;
 
+import java.lang.module.Configuration;
+
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.sleep;
 import static io.qameta.allure.Allure.step;
@@ -42,6 +44,7 @@ public class BaseTest {
     private static void setupSelenideCommon() {
         Configuration.baseUrl = str("baseUrl", T1_RU_BASE_URL);
 
+        Configuration.browserSize = "1920x1080";
         Configuration.timeout = 30000;
         Configuration.pageLoadTimeout = 120000;
         Configuration.pollingInterval = 300;
