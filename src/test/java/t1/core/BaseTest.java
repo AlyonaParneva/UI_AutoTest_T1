@@ -12,6 +12,8 @@ import t1.core.database.service.AnalyticsReportGenerator;
 import t1.core.drivers.DriverFactory;
 import t1.core.listeners.TestResultListener;
 import static com.codeborne.selenide.Condition.visible;
+import org.openqa.selenium.chrome.ChromeOptions;
+import java.util.List;
 
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.sleep;
@@ -58,6 +60,32 @@ public class BaseTest {
         Configuration.pageLoadStrategy = "normal";
         Configuration.clickViaJs = false;
         Configuration.fastSetValue = false;
+
+        ChromeOptions options = new ChromeOptions();
+
+        options.addArguments("--window-size=1920,1080");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--no-sandbox");
+
+        options.addArguments("--disable-blink-features=AutomationControlled");
+
+        options.addArguments(
+                "--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) " +
+                        "AppleWebKit/537.36 (KHTML, like Gecko) " +
+                        "Chrome/147.0.0.0 Safari/537.36"
+        );
+
+        options.setExperimentalOption(
+                "excludeSwitches",
+                List.of("enable-automation")
+        );
+
+        options.setExperimentalOption(
+                "useAutomationExtension",
+                false
+        );
+
+        Configuration.browserCapabilities = options;
     }
 
     @AfterEach
