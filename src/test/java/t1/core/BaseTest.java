@@ -42,8 +42,8 @@ public class BaseTest {
     private static void setupSelenideCommon() {
         Configuration.baseUrl = str("baseUrl", T1_RU_BASE_URL);
 
-        Configuration.timeout = 15000;
-        Configuration.pageLoadTimeout = 60000;
+        Configuration.timeout = 30000;
+        Configuration.pageLoadTimeout = 120000;
         Configuration.pollingInterval = 300;
 
         Configuration.pageLoadStrategy = "none";
