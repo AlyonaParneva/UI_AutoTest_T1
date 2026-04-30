@@ -9,8 +9,6 @@ import t1.core.database.service.AnalyticsReportGenerator;
 import t1.core.drivers.DriverFactory;
 import t1.core.listeners.TestResultListener;
 
-import java.lang.module.Configuration;
-
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.sleep;
 import static io.qameta.allure.Allure.step;
