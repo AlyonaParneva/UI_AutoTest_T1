@@ -2,12 +2,16 @@ package t1.core;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.WebDriverRunner;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import t1.core.config.TestConfig;
 import t1.core.database.service.AnalyticsReportGenerator;
 import t1.core.drivers.DriverFactory;
 import t1.core.listeners.TestResultListener;
+import static com.codeborne.selenide.Condition.visible;
 
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.sleep;
@@ -21,6 +25,13 @@ public class BaseTest {
 
     @BeforeAll
     static void beforeAll() {
+        SelenideLogger.addListener(
+                "AllureSelenide",
+                new AllureSelenide()
+                        .screenshots(true)
+                        .savePageSource(true)
+        );
+
         DriverFactory.setup(System.getProperty("browser"));
         setupSelenideCommon();
     }
@@ -28,13 +39,10 @@ public class BaseTest {
     @BeforeEach
     void openMainIfNeeded() {
         step("SRZ: Открыть главную страницу T1", () -> {
-            open(ABSOLUTE_URL);
-            sleep(500);
-            webdriver().driver().getWebDriver()
-                    .navigate()
-                    .to(T1_RU_BASE_URL);
-
-            sleep(2000);
+            open(T1_RU_BASE_URL);
+            $("body").shouldBe(visible);
+            sleep(3000);
+            System.out.println("Current URL: " + WebDriverRunner.url());
         });
     }
 
@@ -52,8 +60,8 @@ public class BaseTest {
         Configuration.fastSetValue = false;
     }
 
-    @AfterAll
-    static void tearDown() {
+    @AfterEach
+    void tearDown() {
         Selenide.closeWebDriver();
     }
 
