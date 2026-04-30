@@ -46,7 +46,7 @@ public class BaseTest {
         Configuration.pageLoadTimeout = 120000;
         Configuration.pollingInterval = 300;
 
-        Configuration.pageLoadStrategy = "none";
+        Configuration.pageLoadStrategy = "normal";
         Configuration.clickViaJs = false;
         Configuration.fastSetValue = false;
     }
